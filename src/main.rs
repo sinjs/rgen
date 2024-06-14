@@ -1,6 +1,9 @@
+mod args;
+
 use std::iter::repeat_with;
 
-use clap::{Args, Parser, Subcommand, ValueEnum};
+use args::{BooleanType, Cli, Commands, StringType};
+use clap::Parser;
 use rand::Rng;
 
 const ASCII_CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -13,60 +16,6 @@ const EXTENDED_CHARSET: &[u8] =
 const LETTERS_CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 const NUMBERS_CHARSET: &[u8] = b"0123456789";
-
-#[derive(Args)]
-struct StringArgs {
-    #[arg(short, long, default_value_t = 20)]
-    length: u32,
-
-    #[arg(name="type", short, long, value_enum, default_value_t = StringType::Ascii)]
-    mode: StringType,
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
-enum StringType {
-    Ascii,
-    Letters,
-    Numbers,
-    Extended,
-    Hex,
-}
-
-#[derive(Args)]
-struct NumberArgs {
-    min: isize,
-    max: isize,
-}
-
-#[derive(Args)]
-struct BooleanArgs {
-    #[arg(name="type", short, long, value_enum, default_value_t = BooleanType::TrueFalse)]
-    mode: BooleanType,
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
-enum BooleanType {
-    TrueFalse,
-    YesNo,
-    Numeric,
-}
-
-#[derive(Parser)]
-#[command(version, about, long_about = None)]
-struct Cli {
-    #[command(subcommand)]
-    command: Commands,
-
-    #[arg(short, long, default_value_t = 1)]
-    count: u32,
-}
-
-#[derive(Subcommand)]
-enum Commands {
-    String(StringArgs),
-    Number(NumberArgs),
-    Boolean(BooleanArgs),
-}
 
 fn main() {
     let cli = Cli::parse();
