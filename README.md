@@ -2,6 +2,12 @@
 
 Generate cryptographically secure strings, numbers and more right from your terminal.
 
+## Installation
+
+### Compiling from source
+
+To compile from source [please read this guide](BUILDING.md)
+
 ## Usage
 
 ```text
