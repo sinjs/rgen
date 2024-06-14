@@ -4,9 +4,11 @@ Generate cryptographically secure strings, numbers and more right from your term
 
 ## Installation
 
-### Compiling from source
+```sh
+cargo install rgen-cli
+```
 
-To compile from source [please read this guide](BUILDING.md)
+To compile from source instead [please read this guide](BUILDING.md)
 
 ## Usage
 
